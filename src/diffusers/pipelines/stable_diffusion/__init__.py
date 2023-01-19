@@ -65,6 +65,15 @@ else:
 
 
 try:
+    if not (is_transformers_available() and is_torch_available() and is_transformers_version(">=", "4.26.0.dev0")):
+        raise OptionalDependencyNotAvailable()
+except OptionalDependencyNotAvailable:
+    from ...utils.dummy_torch_and_transformers_objects import StableDiffusionDepth2ImgRepaintPipeline
+else:
+    from .pipeline_stable_diffusion_depth2img_repaint import StableDiffusionDepth2ImgRepaintPipeline
+
+
+try:
     if not (is_torch_available() and is_transformers_available() and is_k_diffusion_version(">=", "0.0.12")):
         raise OptionalDependencyNotAvailable()
 except OptionalDependencyNotAvailable:
